@@ -7,7 +7,7 @@
 	</tr>
 	<tr>
 		<th>Parent Page</th>
-		<td><%= f.select(:page_id, @pages.all.collect {|p| [p.name, p.id]}, {:include_blank => "select one"}) %></td>
+		<td><%= f.select(:page_id, @pages, {:include_blank => "select one"}) %></td>
 	</tr>
 	<tr>
 		<th>Position</th>

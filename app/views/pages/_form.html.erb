@@ -7,11 +7,11 @@
 	</tr>
 	<tr>
 		<th>Subject</th>
-		<td><%= f.select(:subject_id, @subjects.all.collect {|s| [s.name, s.id]}, {:include_blank => true}) %></td>
+		<td><%= f.select(:subject_id, @subjects) %></td>
 	</tr>
 	<tr>
 		<th>Position</th>
-		<td><%= f.text_field(:position) %></td>
+		<td><%= f.select(:position, 1..@pages_count) %></td>
 	</tr>
 	<tr>	
 		<th>Permalink</th>

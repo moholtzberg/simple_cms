@@ -18,25 +18,27 @@ class PagesController < ApplicationController
   end
   
   def new
-    @pages = Page.new(params[:page])
-    @subjects = Subject
+    @pages = Page.new(params[:pages])
+    @pages_count = Page.count + 1
+    @subjects = Subject.all.collect {|s| [s.name, s.id]}
     puts "************  #{@subjects.inspect}  ****************"
   end
   
   def create
-    @pages = Page.new(params[:page])
+    @pages = Page.new(params[:pages])
     if @pages.save
       flash[:notice] = "#{@pages.name} has been created"
       redirect_to(:action => "list")
     else
-      @subjects = Subject
+      @pages_count = Page.count + 1
+      @subjects = Subject.all.collect {|s| [s.name, s.id]}
       render("new")
     end
   end
   
   def edit
     @pages = Page.find(params[:id])
-    @subjects = Subject
+    @subjects = Subject.all.collect {|s| [s.name, s.id]}
     puts "************  #{@subjects.inspect}  ****************"
   end
   
@@ -46,7 +48,7 @@ class PagesController < ApplicationController
       flash[:notice] = "#{@pages.name} has been updated"
       redirect_to(:action => "list")
     else
-      @subjects = Subject
+      @subjects = Subject.all.collect {|s| [s.name, s.id]}
       render("edit")
     end
   end

@@ -25,7 +25,7 @@ class SubjectsController < ApplicationController
   def create
     @subjects = Subject.new(params[:subjects])
     if @subjects.save
-      flash[:notice] = "@subjects.name has been created"
+      flash[:notice] = "#{@subjects.name} has been created"
       redirect_to(:action => "list")
     else
       @subjects_count = Subject.count + 1
@@ -41,7 +41,7 @@ class SubjectsController < ApplicationController
   def update
     @subjects = Subject.find(params[:id])
     if @subjects.update_attributes(params[:subjects])
-      flash[:notice] = "@subjects.name has been updated"
+      flash[:notice] = "#{@subjects.name} has been updated"
       redirect_to(:action => "list")
     else
       @subjects_count = Subject.count
@@ -56,7 +56,7 @@ class SubjectsController < ApplicationController
   def destroy
     @subjects = Subject.find(params[:id])
     @subjects.destroy
-    flash[:notice] = "@subjects.name has been destroyed"
+    flash[:notice] = "#{@subjects.name} has been destroyed"
     redirect_to(:action => "list")
   end
   
