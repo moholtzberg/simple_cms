@@ -38,17 +38,22 @@ class PagesController < ApplicationController
   
   def edit
     @pages = Page.find(params[:id])
+    puts "++++ #{Page.count}  ++++"
+    @pages_count = Page.count
     @subjects = Subject.all.collect {|s| [s.name, s.id]}
-    puts "************  #{@subjects.inspect}  ****************"
+    puts "************  #{@pages_count.inspect}  ****************"
   end
   
   def update
     @pages = Page.find(params[:id])
     if @pages.update_attributes(params[:pages])
-      flash[:notice] = "#{@pages.name} has been updated"
+      flash[:notice] = "#{@pages_count.inspect} has been updated"
       redirect_to(:action => "list")
     else
+      puts "++++ #{Page.count}  ++++"
+      @pages_count = Page.count
       @subjects = Subject.all.collect {|s| [s.name, s.id]}
+      puts "************  #{@pages_count.inspect}  ****************"
       render("edit")
     end
   end
