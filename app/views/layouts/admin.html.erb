@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SimpleCms | <%= @page_title || "Admin Area" %></title>
+  <%= stylesheet_link_tag "public", "admin", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+	<div id="header">
+	
+		<h1>Admin Area!</h1>
+		
+		<% if !flash[:notice].blank? %>
+			<div class="notice">
+				<%= flash[:notice] %>
+			</div>
+		<% end %>
+		
+	</div>
+
+	<div id="main">
+		<%= yield %>
+	</div>
+
+	<div id="footer">
+	
+	</div>
+	
+</body>
+</html>

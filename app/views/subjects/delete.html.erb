@@ -1,0 +1,17 @@
+<%= link_to "<< Back", {:action => "list"}, :class => "back-link" %>
+
+<div class="subject delete">
+	<h2>Delete Subject</h2>
+	
+	<%= form_for(:subjects, :url => {:action => "destroy", :id => @subjects.id}) do |f| %>
+	
+	<table summary="Subject form fields">
+		
+		<p>Are you sure you want to delete "<%= @subjects.name %>"</p>
+		
+	</table>
+	<div class="form-buttons">
+		<%= submit_tag("Delete Subject") %>
+	</div>
+	<% end %>
+</div>

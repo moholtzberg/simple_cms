@@ -1,0 +1,5 @@
+<% evil = "<script>alert('hello');</script>".html_safe %>
+<% good = "<strong>safe</strong>".html_safe %>
+
+<%= strip_tags(evil) %><br />
+<%= sanitize(good, :tags => []) %>

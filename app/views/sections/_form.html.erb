@@ -1,0 +1,31 @@
+<%= error_messages_for(@sections) %>
+
+<table summary="Sections form fields">
+	<tr>
+		<th>Name</th>
+		<td><%= f.text_field(:name) %></td>
+	</tr>
+	<tr>
+		<th>Parent Page</th>
+		<td><%= f.select(:page_id, @pages.all.collect {|p| [p.name, p.id]}, {:include_blank => "select one"}) %></td>
+	</tr>
+	<tr>
+		<th>Position</th>
+		<td><%= f.select(:position, 1..@sections_size) %></td>
+	</tr>
+	<tr>	
+		<th>Visible ? </th>
+		<td><%= f.check_box(:visible) %></td>
+	</tr>
+	<tr>	
+		<th>Content Type</th>
+		<td>
+			<%= f.radio_button(:content_type, "Text") %> Text
+			<%= f.radio_button(:content_type, "Html") %> Html
+		</td>
+	</tr>
+	<tr>	
+		<th>Content</th>
+		<td><%= f.text_area(:content) %></td>
+	</tr>
+</table>
