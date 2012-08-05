@@ -18,7 +18,7 @@ html {
 	}
 body { 
 	width: 100%; 
-	min-width: 980px; 
+/*	min-width: auto; */
 	height: 100%; 
 	margin: 0; 
 	padding: 0;
@@ -46,15 +46,33 @@ a:hover {}
 .center { text-align: center; }
 
 /* Structure */
-#header { height: 4em; padding-top: 1em; text-align: center; 
-  background: #993120; color: #FFFFFF; }
-#header h1 { margin: 0; padding: 0; }
-#main { min-height: 500px; background: #F2DC87; }
+#header { 
+	height: 5em; 
+	padding-top: 1em; 
+	padding-bottom: 0;
+	text-align: center; 
+	background: #6699CC; 
+	color: #D8D8D8;
+	}
+#header h1 { 
+	margin: 0; 
+	padding: 0; 
+	}
+#main { 
+	padding: 10px;
+	min-height: 540px; 
+	background: #D8D8D8; 
+	}
 #navigation { float: left; width: 180px; min-height: 480px; padding: 10px; 
   background: #94B26F; color: #4C2516; }
-#content { float: left; padding: 10px; }
-#footer { clear: both; height: 2.5em; text-align: right;
-  background: #4C2516; color: #F2DC87; }
+#content { float: left; padding: 0; }
+#footer { 
+	clear: both; 
+	height: 5.5em; 
+	text-align: right;
+	background: #848484; 
+	color: #F2DC87; 
+	}
 #footer p { margin: 0; padding: 0.5em 1em; }
 
 *//* Navigation */

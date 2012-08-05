@@ -5,11 +5,10 @@
 <%= link_to "Add a new Admin User", {:action => "new"}, :class => "action new" %>
 	<table class="listing" summary="Admin Users List">
 		<tr class="header">
-			<th>&nbsp;</th>
-			<th>Subject</th>
-			<th>Page</th>
-			<th>Visible</th>
-			<th>Sections</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Username</th>
+			<th>Email</th>
 			<th>Actions</th>
 		</tr>
 		<% @admin_users.each do |user| %>
