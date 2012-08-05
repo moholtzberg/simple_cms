@@ -20,6 +20,7 @@ class AccessController < ApplicationController
     if authorized_user
       session[:user_id] = authorized_user.id
       session[:username] = authorized_user.username
+      session[:expires] = Time.now + 300
       flash[:notice] = "You have been logged in successfully!"
       redirect_to(:action => "menu")
     else
