@@ -1,0 +1,31 @@
+<%= link_to "<< Back", {:action => "list"}, :class => "back-link" %>
+<div class="page show">
+	<h2>Show Admin Users</h2>
+	
+	<table summary="page detail view">
+		<tr>
+			<th>Name</th>
+			<td><%= @admin_users.first_name %></td>
+		</tr>
+		<tr>
+			<th>Parent Subject</th>
+			<td><%= @admin_users.last_name %></td>
+		</tr>
+		<tr>
+			<th>Position</th>
+			<td><%= @admin_users.username %></td>
+		</tr>
+		<tr>	
+			<th>Visible ? </th>
+			<td><%= @admin_users.email %></td>
+		</tr>
+		<tr>		
+			<th>Created at</th>
+			<td><%= @admin_users.created_at %></td>
+		</tr>
+		<tr>		
+			<th>Updated at</th>
+			<td><%= @admin_users.updated_at %></td>
+		</tr>
+	</table>
+</div>

@@ -1,4 +1,12 @@
 SimpleCms::Application.routes.draw do
+  # get "admin_users/list"
+  # 
+  # get "admin_users/new"
+  # 
+  # get "admin_users/edit"
+  # 
+  # get "admin_users/delete"
+
   # get "access/menu"
   # 
   # get "access/login"
@@ -7,6 +15,8 @@ SimpleCms::Application.routes.draw do
   root :to => "access#menu"
   
   match "admin", :to => "access#menu"
+  
+  match "users", :to => "admin_users#list"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
