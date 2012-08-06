@@ -4,6 +4,8 @@ class SectionsController < ApplicationController
   
   before_filter :confirm_logged_in
   
+  after_filter :audit_section_edits, :only => [:create, :update]
+  
   def index
     list
     render("list")
@@ -26,7 +28,6 @@ class SectionsController < ApplicationController
   def create
     @sections = Section.new(params[:sections])
     if @sections.save
-      SectionEdit.create(:admin_user_id => @user_id, :section_id => @sections.id, :summary => @sections.content)
       flash[:notice] = "#{@sections.name} has been created"
       redirect_to(:action => "list")
     else
@@ -46,7 +47,7 @@ class SectionsController < ApplicationController
   def update
     @sections = Section.find(params[:id])
     if @sections.update_attributes(params[:sections])
-      SectionEdit.create(:admin_user_id => @user_id, :section_id => @sections.id, :summary => @sections.content)
+      # SectionEdit.create(:admin_user_id => @user_id, :section_id => @sections.id, :summary => @sections.content)
       flash[:notice] = "#{@sections.name} has been updated"
       redirect_to(:action => "list")
     else
@@ -65,6 +66,12 @@ class SectionsController < ApplicationController
     @sections.destroy
     flash[:notice] = "#{@sections.name} has been destroyed"
     redirect_to(:action => "list")
+  end
+  
+  private
+  
+  def audit_section_edits
+    SectionEdit.create(:admin_user_id => @user_id, :section_id => @sections.id, :summary => @sections.content)
   end
   
 end
