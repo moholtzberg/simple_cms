@@ -21,15 +21,16 @@ class SectionsController < ApplicationController
     @sections = Section.new()
     @sections_size = Section.count + 1
     @pages = Page.all.collect {|p| [p.name, p.id]}
-    puts "************  #{@pages.inspect}  ****************"
   end
   
   def create
     @sections = Section.new(params[:sections])
     if @sections.save
+      SectionEdit.create(:admin_user_id => @user_id, :section_id => @sections.id, :summary => @sections.content)
       flash[:notice] = "#{@sections.name} has been created"
       redirect_to(:action => "list")
     else
+      @user = @user_id
       @sections_size = Section.count + 1
       @pages = Page.all.collect {|p| [p.name, p.id]}
       render("new")
@@ -40,12 +41,12 @@ class SectionsController < ApplicationController
     @sections = Section.find(params[:id])
     @sections_size = Section.count
     @pages = Page.all.collect {|p| [p.name, p.id]}
-    puts "************  #{@pages.inspect}  ****************"
   end
   
   def update
     @sections = Section.find(params[:id])
     if @sections.update_attributes(params[:sections])
+      SectionEdit.create(:admin_user_id => @user_id, :section_id => @sections.id, :summary => @sections.content)
       flash[:notice] = "#{@sections.name} has been updated"
       redirect_to(:action => "list")
     else
