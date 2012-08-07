@@ -25,14 +25,17 @@ class AdminUser < ActiveRecord::Base
   validates_confirmation_of :email
   
   attr_accessor :password
-  unless :password.blank?
-    validates_length_of :password, :within => 8..32
-  end
+  
+  # unless :password.blank?
+    validates_length_of :password, :within => 8..32, :on => :create
+    validates_confirmation_of :password
+  # end
   
   before_save :create_hashed_password
   after_save :clear_password
   
   scope :named, lambda {|first, last| where(:first_name => first, :last_name => last)}
+  scope :sorted, order(:last_name, :first_name, :username)
   
   attr_protected :hashed_password, :salt
   
@@ -55,6 +58,10 @@ class AdminUser < ActiveRecord::Base
   
   def self.hash(password="", salt="")
     Digest::SHA1.hexdigest("Put #{salt} on the #{password} for taste")
+  end
+  
+  def full_name
+    "#{first_name} #{last_name}"
   end
   
   private

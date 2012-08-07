@@ -2,7 +2,7 @@
 
 <div class="page list">
 	<h2>Pages</h2>
-<%= link_to "Add a new Page", {:action => "new"}, :class => "action new" %>
+<%= link_to "Add a new Page", {:action => "new", :subject_id => @subject.id}, :class => "action new" %>
 	<table class="listing" summary="Pages List">
 		<tr class="header">
 			<th>&nbsp;</th>
@@ -10,23 +10,24 @@
 			<th>Page</th>
 			<th>Visible</th>
 			<th>Sections</th>
+			<th>Permalink</th>
 			<th>Actions</th>
 		</tr>
 		<% @pages.each do |page| %>
-		<tr>
+		<tr class="<%= cycle("odd", "even") %>">
 			<td><%= page.position %></td>
 			<td><%= page.subject.name %></td>
 			<td><%= page.name %></td>
-			<td class="center"><%= page.visible ? "Yes" : "No" %></td>
-			<td class="center"><%= page.sections.size %></td>
+			<td><%= page.visible ? "Yes" : "No" %></td>
+			<td><%= page.sections.size %></td>
 			<td><%= page.permalink %></td>
 			<td class="actions">
-				<%= link_to("Show", {:action => "show", :id => page.id}, :class => "action show")%>
-				<%= link_to("Edit", {:action => "edit", :id => page.id}, :class => "action edit")%>
-				<%= link_to("Delete", {:action => "delete", :id => page.id}, :class => "action delete")%>
+				<%= link_to("Sections", {:controller => "sections", :action => "list", :page_id => page.id}, :class => "action delete")%>
+				<%= link_to("Show", {:action => "show", :id => page.id, :subject_id => page.subject.id}, :class => "action show")%>
+				<%= link_to("Edit", {:action => "edit", :id => page.id, :subject_id => page.subject.id}, :class => "action edit")%>
+				<%= link_to("Delete", {:action => "delete", :id => page.id, :subject_id => page.subject.id}, :class => "action delete")%>
 			</td>
 		</tr>
 		<% end %>
 	</table>
-	
 </div>

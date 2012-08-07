@@ -13,4 +13,6 @@ class Page < ActiveRecord::Base
   validates_length_of :permalink, :within => 3..32
   validates_uniqueness_of :permalink, :scope => :subject_id
   
+  scope :sorted, order(:position, :name, :permalink)
+  
 end

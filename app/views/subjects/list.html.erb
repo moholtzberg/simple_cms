@@ -12,7 +12,7 @@
 			<th>Actions</th>
 		</tr>
 		<% @subjects.each do |subject| %>
-		<tr>
+		<tr class="<%= cycle("odd", "even") %>">
 			<td><%= subject.position %></td>
 			<td><%= subject.name %></td>
 			<td class="center"><%= subject.visable ? "Yes" : "No" %></td>
@@ -21,6 +21,7 @@
 				<%= link_to("Show", {:action => "show", :id => subject.id}, :class => "action show")%>
 				<%= link_to("Edit", {:action => "edit", :id => subject.id}, :class => "action edit")%>
 				<%= link_to("Delete", {:action => "delete", :id => subject.id}, :class => "action delete")%>
+				<%= link_to("Pages", {:controller => "pages", :action => "list", :subject_id => subject.id, }, :class => "action delete")%>
 			</td>
 		</tr>
 		<% end %>

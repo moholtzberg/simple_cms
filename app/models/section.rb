@@ -13,4 +13,6 @@ class Section < ActiveRecord::Base
   
   validates_inclusion_of :content_type, :in => CONTENT_TYPES, :message => "must be one of the following types #{CONTENT_TYPES.join[', ']}"
   
+  scope :sorted, order(:position, :name, :page_id)
+  
 end

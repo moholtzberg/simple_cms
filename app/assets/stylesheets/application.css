@@ -38,8 +38,13 @@ table tr th, table tr td {
 	text-align: left; 
 	padding: 3px; 
 	}
-a, a:visited { color: #993120; }
-a:hover {}
+a, a:visited {
+	color: #993120; 
+	}
+a:hover {
+	color: red;
+	text-decoration: none;
+}
 
 .clear { clear: both; }
 .center { text-align: center; }

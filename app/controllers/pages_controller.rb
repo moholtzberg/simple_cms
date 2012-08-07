@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   layout "admin"
   
   before_filter :confirm_logged_in
+  before_filter :find_subject
   
   def index
     list
@@ -10,7 +11,7 @@ class PagesController < ApplicationController
   end
   
   def list
-    @pages = Page.order("pages.position ASC")
+    @pages = Page.sorted.where(:subject_id => @subject.id)
   end
   
   def show
@@ -18,17 +19,16 @@ class PagesController < ApplicationController
   end
   
   def new
-    @pages = Page.new(params[:pages])
-    @pages_count = Page.count + 1
+    @pages = Page.new(:subject_id => @subject.id)
+    @pages_count = @subject.pages.count + 1
     @subjects = Subject.all.collect {|s| [s.name, s.id]}
-    puts "************  #{@subjects.inspect}  ****************"
   end
   
   def create
     @pages = Page.new(params[:pages])
     if @pages.save
       flash[:notice] = "#{@pages.name} has been created"
-      redirect_to(:action => "list")
+      redirect_to(:action => "list", :subject_id => @pages.subject.id)
     else
       @pages_count = Page.count + 1
       @subjects = Subject.all.collect {|s| [s.name, s.id]}
@@ -38,22 +38,18 @@ class PagesController < ApplicationController
   
   def edit
     @pages = Page.find(params[:id])
-    puts "++++ #{Page.count}  ++++"
-    @pages_count = Page.count
+    @pages_count = @subject.pages.count
     @subjects = Subject.all.collect {|s| [s.name, s.id]}
-    puts "************  #{@pages_count.inspect}  ****************"
   end
   
   def update
     @pages = Page.find(params[:id])
     if @pages.update_attributes(params[:pages])
-      flash[:notice] = "#{@pages_count.inspect} has been updated"
-      redirect_to(:action => "list")
+      flash[:notice] = "#{@pages.name} has been updated"
+      redirect_to(:action => "list", :subject_id => @pages.subject.id)
     else
-      puts "++++ #{Page.count}  ++++"
-      @pages_count = Page.count
+      @pages_count = @subject.pages.count
       @subjects = Subject.all.collect {|s| [s.name, s.id]}
-      puts "************  #{@pages_count.inspect}  ****************"
       render("edit")
     end
   end
@@ -66,7 +62,15 @@ class PagesController < ApplicationController
     @pages = Page.find(params[:id])
     @pages.destroy
     flash[:notice] = "#{@pages.name} has been destroyed"
-    redirect_to(:action => "list")
+    redirect_to(:action => "list", :subject_id => @pages.subject.id)
+  end
+  
+  private
+  
+  def find_subject
+    if params[:subject_id]
+      @subject = Subject.find_by_id(params[:subject_id])
+    end
   end
   
 end

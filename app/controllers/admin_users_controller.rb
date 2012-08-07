@@ -8,7 +8,7 @@ class AdminUsersController < ApplicationController
   end
   
   def list
-    @admin_users = AdminUser.all
+    @admin_users = AdminUser.sorted
   end
   
   def show

@@ -1,9 +1,9 @@
-<%= link_to "<< Back", {:action => "list"}, :class => "back-link" %>
+<%= link_to "<< Back", {:action => "list", :subject_id => @subject.id}, :class => "back-link" %>
 
 <div class="page delete">
 	<h2>Delete Subject</h2>
 	
-	<%= form_for(:pages, :url => {:action => "destroy", :id => @pages.id}) do |f| %>
+	<%= form_for(:pages, :url => {:action => "destroy", :id => @pages.id, :subject_id => @subject.id}) do |f| %>
 	
 	<table summary="Page form fields">
 		
