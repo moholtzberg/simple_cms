@@ -1,4 +1,7 @@
+require "lib/position_mover"
 class Page < ActiveRecord::Base
+  
+  include PositionMover
   
   belongs_to :subject
   has_many :sections
@@ -14,5 +17,11 @@ class Page < ActiveRecord::Base
   validates_uniqueness_of :permalink, :scope => :subject_id
   
   scope :sorted, order(:position, :name, :permalink)
+  
+  private
+  
+  def position_scope
+    "pages.subject_id = #{subject_id.to_i}"
+  end
   
 end

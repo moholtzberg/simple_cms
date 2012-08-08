@@ -23,8 +23,10 @@ class SubjectsController < ApplicationController
   end
   
   def create
+    new_position = params[:subjects].delete(:position)
     @subjects = Subject.new(params[:subjects])
     if @subjects.save
+      @subjects.move_to_position(new_position)
       flash[:notice] = "#{@subjects.name} has been created"
       redirect_to(:action => "list")
     else
@@ -40,7 +42,9 @@ class SubjectsController < ApplicationController
   
   def update
     @subjects = Subject.find(params[:id])
+    new_position = params[:subjects].delete(:position)
     if @subjects.update_attributes(params[:subjects])
+      @subjects.move_to_position(new_position)
       flash[:notice] = "#{@subjects.name} has been updated"
       redirect_to(:action => "list")
     else
@@ -55,6 +59,7 @@ class SubjectsController < ApplicationController
   
   def destroy
     @subjects = Subject.find(params[:id])
+    @subjects.move_to_position(nil)
     @subjects.destroy
     flash[:notice] = "#{@subjects.name} has been destroyed"
     redirect_to(:action => "list")
