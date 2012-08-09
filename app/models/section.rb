@@ -1,4 +1,4 @@
-require "lib/assets/position_mover"
+require "lib/assets/position_mover.rb"
 class Section < ActiveRecord::Base
   
   include PositionMover
