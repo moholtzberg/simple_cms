@@ -8,4 +8,7 @@ class Subject < ActiveRecord::Base
   validates_presence_of :name
   validates_length_of :name, :within => 3..32
   
+  scope :visible, where(:visable => true)
+  scope :sorted, order(:position)
+  
 end

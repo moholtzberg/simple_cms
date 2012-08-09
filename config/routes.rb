@@ -1,13 +1,13 @@
 SimpleCms::Application.routes.draw do
 
   #get "demo/index"
-  root :to => "access#menu"
+  root :to => "public#index"
   
   match "admin", :to => "access#menu"
   
-  match "users", :to => "admin_users#list"
+  match "admin(/:controller(/:action(/:id)))", :to => "admin_users#list"
   
-  match "sholomke/:permalink", :to => "public#show"
+  match ":permalink", :to => "public#show"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -40,6 +40,12 @@ SimpleCms::Application.routes.draw do
   #     resources :comments, :sales
   #     resource :seller
   #   end
+
+    # resources :subjects do
+    #   resources :pages do
+    #     resource :sections
+    #   end
+    # end
 
   # Sample resource route with more complex sub-resources
   #   resources :products do

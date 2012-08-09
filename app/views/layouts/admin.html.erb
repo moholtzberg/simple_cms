@@ -1,32 +1,45 @@
 <!DOCTYPE html>
+
 <html>
-<head>
-  <title>SimpleCms | <%= @page_title || "Admin Area" %></title>
-  <%= stylesheet_link_tag "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
 
-<body>
-	<div id="header">
+	<head>
 	
-		<h1>Admin Area!</h1>
+		<title>SimpleCms | <%= @page_title || "Admin Area" %></title>
+		<%= stylesheet_link_tag "public", :media => "all" %>
+		<%= javascript_include_tag "public" %>
+		<%= csrf_meta_tags %>
+
+	</head>
+
+	<body class="home blog">
 		
-		<% if !flash[:notice].blank? %>
-			<div class="notice">
-				<%= flash[:notice] %>
+		<div id="container" class="hfeed">
+			
+			<div id="logo">
+				<a href="#"><%= image_tag "rails.png", :title => "logo", :class => "logo" %></a>
 			</div>
-		<% end %>
-		
-	</div>
+			
+			<div id="header">
+				
+				<h3>
+					<% if @user %>
+					Welcome <%= @user.full_name %>!
+					<% end %>
+				</h3>
+				
+				<% if !flash[:notice].blank? %>
+					<div class="notice">
+						<%= flash[:notice] %>
+					</div>
+				<% end %>
+				
+				<% if session[:user_id] %>
+					<%= render(:partial => "layouts/admin_header") %>
+				<% end %>
+			</div><!-- end of #header -->
 
-	<div id="main">
 		<%= yield %>
-	</div>
 
-	<div id="footer">
+	</body>
 	
-	</div>
-	
-</body>
 </html>

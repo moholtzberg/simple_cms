@@ -1,0 +1,11 @@
+<ul class="menu">
+	<% subject.each do |s| %>
+	<li><%= link_to s.name, :action => "view", :subject => s.id %>
+		<ul>
+		<% s.pages.visible.sorted.each do |p| %>
+			<li><%= link_to p.name, :permalink => p.permalink %></li>
+		<% end %>
+		</ul>
+	</li>
+	<% end %>
+</ul>

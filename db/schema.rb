@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120727231112) do
+ActiveRecord::Schema.define(:version => 20120808230347) do
 
   create_table "admin_users", :force => true do |t|
     t.string   "first_name",      :limit => 32
@@ -31,6 +31,40 @@ ActiveRecord::Schema.define(:version => 20120727231112) do
   end
 
   add_index "admin_users_pages", ["admin_user_id", "page_id"], :name => "index_admin_users_pages_on_admin_user_id_and_page_id"
+
+  create_table "makes", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.string   "logo"
+    t.string   "website"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "meters", :force => true do |t|
+    t.integer  "model_id"
+    t.boolean  "is_color"
+    t.integer  "max_duty_cycle"
+    t.integer  "rec_duty_cycle"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "meters", ["model_id"], :name => "index_meters_on_model_id"
+
+  create_table "models", :force => true do |t|
+    t.integer  "make_id"
+    t.string   "name"
+    t.string   "description"
+    t.string   "image"
+    t.date     "launch_date"
+    t.boolean  "metered",     :default => true
+    t.boolean  "active",      :default => true
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "models", ["make_id"], :name => "index_models_on_make_id"
 
   create_table "pages", :force => true do |t|
     t.integer  "subject_id"

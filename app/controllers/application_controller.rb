@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
     else
       session[:expires] = Time.now + 300
       @user_id = session[:user_id]
+      @user = AdminUser.find(@user_id)
       @username = AdminUser.find(@user_id).username
       return true
     end

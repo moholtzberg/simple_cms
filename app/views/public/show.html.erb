@@ -1,3 +1,23 @@
-Name: <%= @page.name %><br />
-Permalink: <%= @page.permalink %><br />
-Parent: <%= @page.subject.name %><br />
+<% @page_title = "#{@page.name} | #{@page.subject.name} | #{@page.permalink}" %>
+	
+			<div id="wrapper" class="clearfix">
+
+				<div id="content-blog" class="grid col-620">
+
+					<div class="widget-wrapper widget_text">
+
+						<div id="content-blog" class="grid col-300"><%= image_tag "rails.png", :title => "logo", :class => "logo" %></div>
+
+						<div class="widget-title"><%= @page.name %></div>
+
+						<div class="textwidget">
+							<p><%= @page.name %></p>
+						</div>
+					
+					</div>
+				
+				</div>
+			
+			</div>
+	
+		</div>

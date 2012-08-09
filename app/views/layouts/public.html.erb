@@ -1,15 +1,28 @@
 <!DOCTYPE html>
+
 <html>
-<head>
-  <title>SimpleCms</title>
-PUBLIC PAGE :)
-  <%= stylesheet_link_tag "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
 
-<%= yield %>
+	<head>
+	
+		<title><%= @page_title %></title>
+		<%= stylesheet_link_tag "public", :media => "all" %>
+		<%= javascript_include_tag "public" %>
+		<%= csrf_meta_tags %>
 
-</body>
+	</head>
+
+	<body class="home blog">
+		
+		<div id="container" class="hfeed">
+			
+			<div id="header">
+				
+				<%= render(:partial => "layouts/header", :locals => {:subject => @subjects}) %>
+				
+			</div><!-- end of #header -->
+
+		<%= yield %>
+
+	</body>
+	
 </html>

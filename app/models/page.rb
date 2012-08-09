@@ -17,6 +17,7 @@ class Page < ActiveRecord::Base
   validates_uniqueness_of :permalink, :scope => :subject_id
   
   scope :sorted, order(:position, :name, :permalink)
+  scope :visible, where(:visible => true)
   
   private
   
