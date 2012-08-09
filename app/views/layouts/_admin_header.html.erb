@@ -1,12 +1,17 @@
-<% if @user %>
-<ul id="tabs">
-	<li class="current" id="dashboard"><a href="/admin">Dashboard</a></li>
-	<li><%= link_to("Manage Content", :controller => "subjects") %></li>
-	<li><%= link_to("Manage Users", :controller => "users") %></li>
-</ul>
+<% @page_title = "Admin Menu" %>
+<div id="top-menu">
+	
 
-<p class="header-item" id="utility_nav">
-	Welcome <%= @user.full_name %>   
-	<%= link_to("Log Out", :controller => "access", :action => "logout") %>
-</p>
-<% end %>
+	
+
+	<div class="col grid-620">
+		<div class="widget-wrapper">
+			<ul class="menu">
+				<li><%= link_to("Manage Content", :controller => "subjects") %></li>
+				<li><%= link_to("Manage Users", :controller => "users") %></li>
+			</ul>
+			<br	/>
+			<%= button_to("Logout", :action => "logout", :class => "call to action") %>
+		</div>
+	</div>
+</div>

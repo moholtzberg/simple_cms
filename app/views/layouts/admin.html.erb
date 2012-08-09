@@ -4,43 +4,42 @@
 
 	<head>
 	
-		<title>World Trade Office Solutions CMS! | <%= @page_title || "Admin Area" %></title>
-		<%= stylesheet_link_tag "subjects", :media => "all" %>
-		<%= javascript_include_tag "" %>
+		<title>SimpleCms | <%= @page_title || "Admin Area" %></title>
+		<%= stylesheet_link_tag "public", :media => "all" %>
+		<%= javascript_include_tag "public" %>
 		<%= csrf_meta_tags %>
 
 	</head>
 
-	<body class="logged_in admin_dashboard index">
+	<body class="home blog">
 		
-		<div id="wrapper">
+		<div id="container" class="hfeed">
+			
+			<div id="logo">
+				<a href="#"><%= image_tag "rails.png", :title => "logo", :class => "logo" %></a>
+			</div>
 			
 			<div id="header">
 				
-				<h1 id="site_title">World Trade Office Solutions CMS!</h1>
+				<h3>
+					<% if @user %>
+					Welcome <%= @user.full_name %>!
+					<% end %>
+				</h3>
 				
-				<%= render(:partial => "layouts/admin_header") %>
+				<% if !flash[:notice].blank? %>
+					<div class="notice">
+						<%= flash[:notice] %>
+					</div>
+				<% end %>
 				
-			</div>
-			
-			<div id="title_bar">
-				
-				<div id="titlebar_left">
-					<h2 id="page_title"><%= @page_title %></h2>
-				</div>
-				
-				<div id="titlebar_right">
-					<%= image_tag "rails.png", :title => "logo", :class => "logo" %>
-				</div>
-				
-			</div>
-			
-			<%= render(:partial => "layouts/flashes") %>
-			
-		</div>
-		
+				<% if session[:user_id] %>
+					<%= render(:partial => "layouts/admin_header") %>
+				<% end %>
+			</div><!-- end of #header -->
+
 		<%= yield %>
-		
+
 	</body>
 	
 </html>
