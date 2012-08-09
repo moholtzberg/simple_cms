@@ -1,4 +1,4 @@
-require "lib/position_mover"
+require "lib/assets/position_mover"
 class Page < ActiveRecord::Base
   
   include PositionMover
