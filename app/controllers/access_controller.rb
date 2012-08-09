@@ -10,6 +10,7 @@ class AccessController < ApplicationController
   end
   
   def menu
+    @last_subjects = Subject.limit(5).offset(0).order("subjects.id DESC")
   end
 
   def login
